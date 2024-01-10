@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="picture/favicon.png" type="image/x-icon">
+  <title>摂氏/華氏換算システム・Flegertec</title>
+  <style>
+    @font-face {
+      font-family: "03SmartFontUI";
+      src: url("font/03SmartFontUI.ttf");
+    }
+      
+    body {
+      font-family: '03SmartFontUI', sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    #converter {
+      width: 350px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+<div id="converter">
+  <h2>摂氏・華氏換算システム</h2>
+  <label for="celsius">摂氏</label>
+  <input type="number" id="celsius" placeholder="摂氏の数値を入力してください" oninput="convert('celsius')">
+  <br>
+  <label for="fahrenheit">華氏</label>
+  <input type="number" id="fahrenheit" placeholder="華氏の数値を入力してください" oninput="convert('fahrenheit')">
+  <br>
+  <button onclick="clearInputs()">クリア</button>
+</div>
+
+<script>
+  function convert(unit) {
+    const celsiusInput = document.getElementById('celsius');
+    const fahrenheitInput = document.getElementById('fahrenheit');
+
+    if (unit === 'celsius') {
+      const celsiusValue = parseFloat(celsiusInput.value);
+      const fahrenheitValue = (celsiusValue * 9/5) + 32;
+      fahrenheitInput.value = isNaN(fahrenheitValue) ? '' : fahrenheitValue.toFixed(2);
+    } else if (unit === 'fahrenheit') {
+      const fahrenheitValue = parseFloat(fahrenheitInput.value);
+      const celsiusValue = (fahrenheitValue - 32) * 5/9;
+      celsiusInput.value = isNaN(celsiusValue) ? '' : celsiusValue.toFixed(2);
+    }
+  }
+
+  function clearInputs() {
+    document.getElementById('celsius').value = '';
+    document.getElementById('fahrenheit').value = '';
+  }
+</script>
+
+</body>
+</html>
